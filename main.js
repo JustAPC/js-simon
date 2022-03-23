@@ -2,18 +2,35 @@ let numeriCasuali = [];
 
 let arrayNumeriUtente = [];
 
+let numeriCorretti = [];
+
 for (i=0; i<5; i++) {
     numeriCasuali.push(getRandomInt(1, 100))
 }
 
-document.getElementById("numeri-casuali").innerHTML = `Hai 5 secondi per imparare questi numeri: ${numeriCasuali}`
+const numeriDaMemorizzare = document.getElementById("numeri-da-memorizzare");
+
+numeriDaMemorizzare.innerHTML = `Hai 5 secondi per imparare questi numeri: ${numeriCasuali}`
+
+setTimeout (numeriDisappear , 5000 );
+
+setTimeout (inserimentoNumeri , 5001 );
+
+setTimeout (numeriAppear , 6000)
+
+for (let i = 0; i < arrayNumeriUtente.length; i++) {
+    if (!arrayNumeriUtente.includes(numeriCasuali)) {
+        numeriCorretti.push(arrayNumeriUtente(i));
+    }
+}
 
 
-setTimeout (numeriDisappear , 2900 );
 
-setTimeout (myFunction , 3000 );
 
-function myFunction () {
+
+
+
+function inserimentoNumeri () {
     
     for (i=0; i < 5; i++) {
         let numeriUtente = parseInt (prompt ("Inserisci uno dei numeri che hai memorizzato"));
@@ -26,8 +43,6 @@ function myFunction () {
 }
 
 
-
-
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -35,8 +50,12 @@ function getRandomInt(min, max) {
 }
 
 function numeriDisappear () {
-    const numeriGenerati = document.getElementById("numeri-casuali");
-    numeriGenerati.style.display = "none";
+    numeriDaMemorizzare.style.display = "none";
+}
+
+function numeriAppear () {
+    document.getElementById("risultato-numeri").innerHTML = `I numeri da memorizzare erano ${numeriCasuali}`
+    document.getElementById("risultato-finale").innerHTML = `Hai indovinato ${numeriCorretti.length} numeri: ${numeriCorretti}`
 }
 
 function shuffle (numeriCasuali) {
